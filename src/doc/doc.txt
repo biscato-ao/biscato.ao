@@ -1,0 +1,20 @@
+src
+├── components
+│   ├── Header.js            // Componente do cabeçalho do aplicativo
+│   └── Footer.js            // Componente do rodapé do aplicativo
+├── pages
+│   ├── Home.js              // Página inicial do aplicativo
+│   ├── Login.js             // Página de login para autenticação de usuários
+│   ├── Register.js          // Página de registro para novos usuários
+│   ├── Dashboard.js         // Página principal após o login, exibindo informações e funcionalidades principais
+│   ├── Profile.js           // Página de perfil do usuário, mostrando informações e permitindo a edição do perfil
+│   ├── Jobs.js              // Página que lista os trabalhos disponíveis ou em andamento
+│   ├── JobDetails.js        // Página que exibe os detalhes de um trabalho específico
+│   ├── CreateJob.js         // Página para criar um novo trabalho
+│   ├── Messages.js          // Página de mensagens, permitindo a comunicação entre usuários
+│   ├── Settings.js          // Página de configurações do aplicativo
+│   ├── SavedJobs.js         // Página que exibe os trabalhos salvos pelo usuário
+│   ├── Terms.js             // Página com os termos de responsabilidade do aplicativo
+│   ├── About.js             // Página com informações sobre o aplicativo ou plataforma de freelancers
+│   └── Professionals.js     // Página que lista os profissionais cadastrados no aplicativo
+└── App.js                   // Componente principal do aplicativo

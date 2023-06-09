@@ -1,25 +1,22 @@
 import React from 'react';
-
 import { FaFacebookF, FaLinkedinIn, FaYoutube } from "react-icons/fa";
-
 import './style.scss'
-
+import { Link } from 'react-router-dom';
 
 import img1 from '../../asset/img/img1.png';
 import img2 from '../../asset/img/img2.png';
 import img3 from '../../asset/img/img3.png';
 import logo from '../../asset/vector/logo.svg';
 
-// import { Link } from 'react-router-dom';
 import logoText from '../../asset/vector/logo_text.svg';
 
 const Home: React.FC = () => {
   return <>
   <nav className="navbar navbar-light bg-white pt-3 pb-3 border-bottom fixed-top">
       <div className="container">
-        <a href="/"><img src={logoText} width="100"/></a>
+        <a href="/"><img src={logoText} width="100" alt='img'/></a>
         <div className="d-flex">
-          <a href="/alert" className="btn btn-light bg-white border-0 pt-3">Entrar</a>
+          <Link to="/login" className="btn btn-light bg-white border-0 border-60 pt-3" title='Entrar na pagina'>Entrar</Link>
         </div>
       </div>
     </nav>
@@ -31,11 +28,12 @@ const Home: React.FC = () => {
         <div className="mt-5 pt-5">
           <h1 className="display-4">Conectando quem precisa com quem sabe fazer</h1>
           <h5 className="opacity-50">Fale o que precisa, receba até 10 orçamentos e escolha o melhor.</h5 >
-          <button type="button" className="btn btn-primary pe-4 mt-3 ps-4">Saber mais</button>
+          <button type="button" className="btn btn-primary pe-4 mt-3 ps-4">Entrar</button>
+          <Link to="/biscato" className="btn btn-light ms-3 pe-4 mt-3 ps-4">Ver serviços</Link>
         </div>
         </div>
         <div className="col-md-6 d-flex align-items-center">
-        <img src={img1} className="img-fluid mt-5"/>
+        <img src={img1} className="img-fluid mt-5"  alt='img'/>
         </div>
       </div>
     </div>
@@ -52,7 +50,7 @@ const Home: React.FC = () => {
           <div className="col-sm-4 mb-5">
             <div className="card border-0">
               <div className="card-body p-20">
-                <img src={logo} alt="" width={50} className="mb-4"/>
+                <img src={logo} width={50} className="mb-4" alt='img'/>
                 <h4><b>Faça o seu pedido</b></h4>
                 Fale o que você precisa. <br /> É rápido e de graça!
               </div>
@@ -61,7 +59,7 @@ const Home: React.FC = () => {
           <div className="col-sm-4 mb-5">
             <div className="card border-0">
               <div className="card-body p-20">
-                <img src={logo} alt="" width={50} className="mb-4"/>
+                <img src={logo} width={50} className="mb-4" alt='img'/>
                 <h4><b>Receba até 10 orçamentos</b></h4>
                 Profissionais avaliados entram em contato com você em instantes!
               </div>
@@ -70,7 +68,7 @@ const Home: React.FC = () => {
           <div className="col-sm-4 mb-5">
             <div className="card border-0">
               <div className="card-body p-20">
-                <img src={logo} alt="" width={50} className="mb-4"/>
+                <img src={logo} width={50} className="mb-4" alt='img'/>
                 <h4><b>Escolha o melhor</b></h4>
                 Negocie direto com eles. Fácil como nunca foi antes!
               </div>
@@ -83,7 +81,7 @@ const Home: React.FC = () => {
     <div className="container">
       <div className="row">
         <div className="col-sm-5 d-flex align-items-center mb-5">
-        <img src={img2} className="img-fluid"/>
+        <img src={img2} className="img-fluid" alt='img'/>
         </div>
         <div className="col-sm-5 d-flex align-items-center mb-5">
           <div>
@@ -108,7 +106,7 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className="col-sm-6 d-flex mb-5 align-items-center">
-          <img src={img3} className="img-fluid"/>
+          <img src={img3} className="img-fluid" alt='img'/>
           </div>
         </div>
       </div>
