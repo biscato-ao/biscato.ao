@@ -1,0 +1,42 @@
+.inputForm{
+  width: 100%;
+  border: 1px solid #ebebeb !important;
+  min-height: 45px;
+  max-height: auto;
+  border-radius: 7px;
+  .label{
+    color:#444444aa;
+    margin-top: -10px;
+    margin-bottom: -4px;
+    font-size: 15px !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    span{
+      padding-left: 7px;
+      padding-right:7px;
+      background: #fff;
+    }
+  }
+  input{
+    padding: 0px;
+    outline: none;
+    box-shadow: none;
+    padding-left: 19px;
+    padding-right: 19px;
+    border: none;
+  }
+  textarea{
+    padding: 0px;
+    outline: none;
+    box-shadow: none;
+    padding-left: 19px;
+    padding-right: 19px;
+    border: none;
+  }
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+}

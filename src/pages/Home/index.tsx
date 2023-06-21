@@ -14,9 +14,9 @@ const Home: React.FC = () => {
   return <>
   <nav className="navbar navbar-light bg-white pt-3 pb-3 border-bottom fixed-top">
       <div className="container">
-        <a href="/"><img src={logoText} width="100" alt='img'/></a>
+        <a href="/"><img src={logoText} width={80} alt='img'/></a>
         <div className="d-flex">
-          <Link to="/login" className="btn btn-light bg-white border-0 border-60 pt-3" title='Entrar na pagina'>Entrar</Link>
+          <Link to="/login" className="btn-light bg-white border-0 a_link_hum" title='Entrar na pagina'>Entrar</Link>
         </div>
       </div>
     </nav>
@@ -28,8 +28,8 @@ const Home: React.FC = () => {
         <div className="mt-5 pt-5">
           <h1 className="display-4">Conectando quem precisa com quem sabe fazer</h1>
           <h5 className="opacity-50">Fale o que precisa, receba até 10 orçamentos e escolha o melhor.</h5 >
-          <button type="button" className="btn btn-primary pe-4 mt-3 ps-4">Entrar</button>
-          <Link to="/biscato" className="btn btn-light ms-3 pe-4 mt-3 ps-4">Ver serviços</Link>
+          <Link to="/login" className="btn btn-primary pe-4 mt-3 ps-4 pt-2_5">Entrar</Link>
+          <Link to="/dashboard" className="btn btn-light ms-3 pe-4 mt-3 pt-2_1 ps-4">Ver serviços</Link>
         </div>
         </div>
         <div className="col-md-6 d-flex align-items-center">

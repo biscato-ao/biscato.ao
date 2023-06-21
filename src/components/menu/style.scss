@@ -1,0 +1,93 @@
+.navbar{
+  .a-link{
+    color: #111 !important;
+    text-decoration: none !important;
+  }
+  height: 70px;
+  background: #fff;
+  .nav-menu{
+    // background: red;
+  }
+  .input-group-search{
+    border-radius: 8px;
+    input{
+      height: 40px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    button{
+      height: 40px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      padding-top: 3px;
+    }
+
+    
+  }
+  .dropdown-toggle {
+    background: none !important;
+    color: #111;
+    border: none !important;
+    padding: 0;
+    height: auto;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+  }
+  .dropdown-toggle::after {
+    display: none;
+}
+  .avatar{
+    width: 35px;
+    height: 35px;
+    margin-top: 1px;
+    img{
+      width: 35px;
+      height: 35px;
+      object-position: top;
+      object-fit: cover;
+      border-radius: 100%;
+    }
+  }
+  .btn-group{
+    .button{
+      border: none !important;
+      height: 40px;
+      font-size: 18px;
+      &:hover{
+        color: #4E9F3D;
+      }
+    }
+  }
+  .search{
+    padding-top: 1px;
+  }
+  .nav-menu{
+    .nav{
+      .nav-link{
+        font-size: 15px !important;
+        color: #828282;
+        &:hover{
+          color: #111;
+        }
+      }
+      .nav-lin.active{
+        color: #111;
+      }
+    }
+  }
+  .badge-statu-user{
+    height: 25px !important;
+    background: #D8E9A8;
+    color: #111;
+    margin-top: 7px;
+    padding-top: 7px;
+    border-radius: 100px;
+    padding-left: 15px;
+    padding-top: 8px;
+    padding-right: 15px;
+    font-size: 11px;
+  }
+}  

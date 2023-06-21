@@ -1,0 +1,17 @@
+.JobDetails{
+  .card{
+    box-shadow: none !important;
+    .badge{
+      color: #111;
+      background: #D8E9A8;
+      border-radius: 50px;
+      padding-left: 15px;
+      font-weight: 600;
+      padding-top: 7px;
+      font-weight: 100;
+      padding-bottom: 7px;
+      font-size: 14px !important;
+      padding-right: 15px;
+    }
+  }
+}

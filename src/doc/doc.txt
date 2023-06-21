@@ -18,3 +18,416 @@ src
 │   ├── About.js             // Página com informações sobre o aplicativo ou plataforma de freelancers
 │   └── Professionals.js     // Página que lista os profissionais cadastrados no aplicativo
 └── App.js                   // Componente principal do aplicativo
+
+
+ const professionals = [
+    'Cabeleireiro/Cabeleireira',
+    'Babá',
+    'Diarista',
+    'Faxineiro/Faxineira',
+    'Mecânico/Mecânica',
+    'Pintor/Pintora',
+    'Eletricista',
+    'Encanador/Encanadora',
+    'Jardineiro/Jardineira',
+    'Cozinheiro/Cozinheira',
+    'Costureiro/Costureira',
+    'Pedreiro/Pedreira',
+    'Manicure/Pedicure',
+    'Vendedor/Vendedora',
+    'Entregador/Entregadora',
+    'Técnico de Refrigeração/Refrigerista',
+    'Serralheiro/Serralheira',
+    'Maquiador/Maquiadora Profissional',
+    'Lavadeiro/Lavadeira',
+    'Engomadeiro/Engomadeira',
+    'Marceneiro/Marceneira',
+    'Garçom/Garçonete',
+    'Bartender/Barman',
+    'Fotógrafo/Fotógrafa',
+    'Modelo',
+    'Pasteleiro/Pasteleira',
+    'Promotor(a) de Marketing'
+  ];
+
+
+Aqui está uma lista expandida de funcionalidades para o seu aplicativo de biscato:
+
+1. Registro de usuário: Permitir que os usuários se cadastrem no aplicativo.
+2. Login: Permitir que os usuários façam login em suas contas.
+3. Edição de perfil: Permitir que os usuários editem suas informações de perfil, como nome, foto, habilidades, localização, código postal, biografia, etc.
+4. Publicar serviço: Permitir que os usuários publiquem os serviços que estão oferecendo, fornecendo detalhes como título, descrição, categoria, habilidades necessárias, localização, preço, etc.
+5. Pesquisar serviços: Permitir que os usuários pesquisem serviços com base em categorias, localização, habilidades, etc.
+6. Visualizar detalhes do serviço: Permitir que os usuários visualizem os detalhes completos de um serviço, incluindo informações do prestador de serviço, avaliações, fotos, etc.
+7. Fazer proposta: Permitir que os usuários interessados façam propostas para os serviços publicados, incluindo detalhes sobre o preço, prazo, etc.
+8. Aceitar proposta: Permitir que o prestador de serviço aceite uma proposta de um cliente específico.
+9. Gerenciar propostas: Permitir que os usuários acompanhem e gerenciem as propostas recebidas e enviadas.
+10. Fechar trabalho: Somente quando tanto o cliente quanto o prestador de serviço concordarem com os termos, o trabalho é considerado fechado.
+11. Avaliar e comentar: Permitir que os usuários avaliem e comentem sobre os prestadores de serviço e os serviços recebidos.
+12. Favoritos: Permitir que os usuários salvem serviços e prestadores de serviço como favoritos para acesso rápido.
+13. Notificações: Enviar notificações para os usuários sobre propostas recebidas, atualizações de trabalho, mensagens, etc.
+14. Sistema de mensagens: Permitir que os usuários se comuniquem entre si por meio de mensagens internas no aplicativo.
+15. Histórico de trabalho: Permitir que os usuários visualizem seu histórico de trabalhos concluídos, incluindo detalhes, datas, avaliações, etc.
+
+Essas são apenas algumas funcionalidades principais, e você pode expandir ou personalizar de acordo com as necessidades do seu aplicativo.
+
+
+
+Aqui estão as coleções adicionais que você mencionou, juntamente com um campo "descrição" em cada uma delas:
+
+1. `jobs`: Armazena os trabalhos disponíveis.
+   - Descrição: Coleção que contém informações sobre os trabalhos disponíveis para os profissionais.
+2. `notifications`: Armazena as notificações dos usuários.
+   - Descrição: Coleção que registra as notificações enviadas aos usuários.
+3. `proposals`: Armazena as propostas enviadas pelos usuários.
+   - Descrição: Coleção que registra as propostas enviadas pelos usuários para os trabalhos.
+4. `requests`: Armazena as solicitações enviadas pelos usuários.
+   - Descrição: Coleção que registra as solicitações enviadas pelos usuários para os trabalhos.
+5. `savedJobs`: Armazena os trabalhos salvos pelos usuários.
+   - Descrição: Coleção que registra os trabalhos salvos pelos usuários para visualização posterior.
+6. `skills`: Armazena as habilidades disponíveis.
+   - Descrição: Coleção que contém informações sobre as habilidades disponíveis para os usuários selecionarem.
+7. `tags`: Armazena as tags relacionadas aos trabalhos.
+   - Descrição: Coleção que contém informações sobre as tags associadas aos trabalhos para facilitar a pesquisa e filtragem.
+8. `users`: Armazena as informações dos usuários.
+   - Descrição: Coleção que contém as informações dos usuários, como nome, email, senha e outros dados relevantes.
+
+Essas descrições fornecem uma visão geral do propósito de cada coleção. Você pode adaptar as descrições de acordo com as necessidades específicas do seu aplicativo.
+
+
+
+export interface Skill {
+  id: string; // ID exclusivo da habilidade.
+  name: string; // Nome da habilidade.
+  description: string; // Descrição da habilidade.
+  imageUrl: string; // URL da imagem associada à habilidade.
+  category: string; // Categoria da habilidade.
+  bannerImageUrl: string; // URL da imagem de banner associada à habilidade.
+}
+
+const professionals: Skill[] = [
+  {
+    id: "1",
+    name: "Cabeleireiro/Cabeleireira",
+    description: "Profissional especializado(a) em cortes e cuidados com o cabelo.",
+    imageUrl: "url_da_imagem_cabeleireiro",
+    category: "Beleza",
+    bannerImageUrl: "url_da_imagem_banner_cabeleireiro"
+  },
+  {
+    id: "2",
+    name: "Babá",
+    description: "Profissional responsável por cuidar de crianças e auxiliar com suas necessidades.",
+    imageUrl: "url_da_imagem_baba",
+    category: "Cuidados Pessoais",
+    bannerImageUrl: "url_da_imagem_banner_baba"
+  },
+  {
+    id: "3",
+    name: "Diarista",
+    description: "Profissional que realiza serviços domésticos em residências, como limpeza e organização.",
+    imageUrl: "url_da_imagem_diarista",
+    category: "Limpeza",
+    bannerImageUrl: "url_da_imagem_banner_diarista"
+  },
+  {
+    id: "4",
+    name: "Faxineiro/Faxineira",
+    description: "Profissional que realiza serviços de faxina e limpeza em diversos ambientes.",
+    imageUrl: "url_da_imagem_faxineiro",
+    category: "Limpeza",
+    bannerImageUrl: "url_da_imagem_banner_faxineiro"
+  },
+  {
+    id: "5",
+    name: "Mecânico/Mecânica",
+    description: "Profissional especializado(a) em consertos e manutenção de veículos automotivos.",
+    imageUrl: "url_da_imagem_mecanico",
+    category: "Automotivo",
+    bannerImageUrl: "url_da_imagem_banner_mecanico"
+  },
+  {
+    id: "6",
+    name: "Pintor/Pintora",
+    description: "Profissional que realiza serviços de pintura em paredes, móveis e outras superfícies.",
+    imageUrl: "url_da_imagem_pintor",
+    category: "Construção",
+    bannerImageUrl: "url_da_imagem_banner_pintor"
+  },
+  {
+    id: "7",
+    name: "Eletricista",
+    description: "Profissional especializado(a) em instalação e reparo de sistemas elétricos.",
+    imageUrl: "url_da_imagem_eletricista",
+    category: "Elétrica",
+    bannerImageUrl: "url_da_imagem_banner_eletricista"
+  },
+  {
+    id: "8",
+    name: "Encanador/Encanadora",
+    description: "Profissional especializado(a) em instalação e reparo de sistemas hidráulicos.",
+    imageUrl: "url_da_imagem_encanador",
+    category: "Hidráulica",
+    bannerImageUrl: "url_da_imagem_banner_encanador"
+  },
+  {
+    id: "9",
+    name: "Jardineiro/Jardineira",
+    description: "Profissional responsável pela manutenção e cuidado de jardins e áreas verdes.",
+    imageUrl: "url_da_imagem_jardineiro",
+    category: "Jardinagem",
+    bannerImageUrl: "url_da_imagem_banner_jardineiro"
+  },
+  {
+    id: "10",
+    name: "Cozinheiro/Cozinheira",
+    description: "Profissional especializado(a) na preparação de alimentos e culinária em geral.",
+    imageUrl: "url_da_imagem_cozinheiro",
+    category: "Gastronomia",
+    bannerImageUrl: "url_da_imagem_banner_cozinheiro"
+  },
+  {
+    id: "11",
+    name: "Costureiro/Costureira",
+    description: "Profissional especializado(a) em costura e reparos de roupas e tecidos.",
+    imageUrl: "url_da_imagem_costureiro",
+    category: "Moda",
+    bannerImageUrl: "url_da_imagem_banner_costureiro"
+  },
+  {
+    id: "12",
+    name: "Pedreiro/Pedreira",
+    description: "Profissional especializado(a) em construção e reforma de estruturas.",
+    imageUrl: "url_da_imagem_pedreiro",
+    category: "Construção",
+    bannerImageUrl: "url_da_imagem_banner_pedreiro"
+  },
+  {
+    id: "13",
+    name: "Manicure/Pedicure",
+    description: "Profissional especializado(a) em cuidados estéticos das unhas das mãos e pés.",
+    imageUrl: "url_da_imagem_manicure",
+    category: "Beleza",
+    bannerImageUrl: "url_da_imagem_banner_manicure"
+  },
+  {
+    id: "14",
+    name: "Vendedor/Vendedora",
+    description: "Profissional responsável por vendas de produtos ou serviços.",
+    imageUrl: "url_da_imagem_vendedor",
+    category: "Vendas",
+    bannerImageUrl: "url_da_imagem_banner_vendedor"
+  },
+  {
+    id: "15",
+    name: "Entregador/Entregadora",
+    description: "Profissional responsável por realizar entregas de produtos ou encomendas.",
+    imageUrl: "url_da_imagem_entregador",
+    category: "Entregas",
+    bannerImageUrl: "url_da_imagem_banner_entregador"
+  },
+  {
+    id: "16",
+    name: "Técnico de Refrigeração/Refrigerista",
+    description: "Profissional especializado(a) em consertos e manutenção de sistemas de refrigeração.",
+    imageUrl: "url_da_imagem_tecnico_refrigeracao",
+    category: "Refrigeração",
+    bannerImageUrl: "url_da_imagem_banner_tecnico_refrigeracao"
+  },
+  {
+    id: "17",
+    name: "Serralheiro/Serralheira",
+    description: "Profissional especializado(a) em trabalhos de serralheria e fabricação de estruturas metálicas.",
+    imageUrl: "url_da_imagem_serralheiro",
+    category: "Serralheria",
+    bannerImageUrl: "url_da_imagem_banner_serralheiro"
+  },
+  {
+    id: "18",
+    name: "Maquiador/Maquiadora Profissional",
+    description: "Profissional especializado(a) em maquiagem para eventos, festas e produções.",
+    imageUrl: "url_da_imagem_maquiador",
+    category: "Beleza",
+    bannerImageUrl: "url_da_imagem_banner_maquiador"
+  },
+  {
+    id: "19",
+    name: "Lavadeiro/Lavadeira",
+    description: "Profissional que realiza serviços de lavagem e cuidados com roupas e tecidos.",
+    imageUrl: "url_da_imagem_lavadeiro",
+    category: "Limpeza",
+    bannerImageUrl: "url_da_imagem_banner_lavadeiro"
+  },
+  {
+    id: "20",
+    name: "Engomadeiro/Engomadeira",
+    description: "Profissional especializado(a) em engomar e passar roupas.",
+    imageUrl: "url_da_imagem_engomadeiro",
+    category: "Limpeza",
+    bannerImageUrl: "url_da_imagem_banner_engomadeiro"
+  },
+  {
+    id: "21",
+    name: "Marceneiro/Marceneira",
+    description: "Profissional especializado(a) em trabalhos de marcenaria e fabricação de móveis de madeira.",
+    imageUrl: "url_da_imagem_marceneiro",
+    category: "Marcenaria",
+    bannerImageUrl: "url_da_imagem_banner_marceneiro"
+  },
+  {
+    id: "22",
+    name: "Garçom/Garçonete",
+    description: "Profissional responsável por servir clientes em bares e restaurantes.",
+    imageUrl: "url_da_imagem_garcom",
+    category: "Gastronomia",
+    bannerImageUrl: "url_da_imagem_banner_garcom"
+  },
+  {
+    id: "23",
+    name: "Bartender/Barman",
+    description: "Profissional especializado(a) em preparar e servir bebidas em bares e eventos.",
+    imageUrl: "url_da_imagem_bartender",
+    category: "Gastronomia",
+    bannerImageUrl: "url_da_imagem_banner_bartender"
+  },
+  {
+    id: "24",
+    name: "Fotógrafo/Fotógrafa",
+    description: "Profissional especializado(a) em capturar e registrar momentos através da fotografia.",
+    imageUrl: "url_da_imagem_fotografo",
+    category: "Fotografia",
+    bannerImageUrl: "url_da_imagem_banner_fotografo"
+  },
+  {
+    id: "25",
+    name: "Modelo",
+    description: "Profissional que atua como modelo para fotos, desfiles, publicidade, entre outros.",
+    imageUrl: "url_da_imagem_modelo",
+    category: "Moda",
+    bannerImageUrl: "url_da_imagem_banner_modelo"
+  },
+  {
+    id: "26",
+    name: "Pasteleiro/Pasteleira",
+    description: "Profissional especializado(a) em fazer e vender pasteis de diversos sabores.",
+    imageUrl: "url_da_imagem_pasteleiro",
+    category: "Gastronomia",
+    bannerImageUrl: "url_da_imagem_banner_pasteleiro"
+  },
+  {
+    id: "27",
+    name: "Promotor(a) de Marketing",
+    description: "Profissional responsável por promover produtos ou serviços através de estratégias de marketing.",
+    imageUrl: "url_da_imagem_promotor_marketing",
+    category: "Marketing",
+    bannerImageUrl: "url_da_imagem_banner_promotor_marketing"
+  }
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------
+
+import React from 'react';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import firebaseConfig from '../../key';
+import { Skill } from '../../interface';
+
+const CreateJob: React.FC = () => {
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const skillsCollection = collection(db, 'skills');
+
+  const addSkill = async (newSkillData: Skill) => {
+    try {
+      const docRef = await addDoc(skillsCollection, newSkillData);
+      console.log('Skill adicionada com sucesso! ID do documento:', docRef.id);
+    } catch (error) {
+      console.error('Erro ao adicionar a skill:', error);
+    }
+  };
+
+  const handleClick = async () => {
+    const newSkills: Skill[] = [
+      {
+        id: "1",
+        name: "Cabeleireiro/Cabeleireira",
+        description: "Profissional especializado(a) em cortes, penteados e tratamentos capilares.",
+        imageUrl: "url_da_imagem_cabeleireiro",
+        category: "Beleza",
+        bannerImageUrl: "url_da_imagem_banner_cabeleireiro"
+      },
+      {
+        id: "2",
+        name: "Babá",
+        description: "Profissional responsável por cuidar e zelar pelo bem-estar de crianças.",
+        imageUrl: "url_da_imagem_baba",
+        category: "Cuidados infantis",
+        bannerImageUrl: "url_da_imagem_banner_baba"
+      },
+      {
+        id: "3",
+        name: "Diarista",
+        description: "Profissional que realiza serviços de limpeza e organização de residências.",
+        imageUrl: "url_da_imagem_diarista",
+        category: "Limpeza",
+        bannerImageUrl: "url_da_imagem_banner_diarista"
+      },
+      {
+        id: "4",
+        name: "Faxineiro/Faxineira",
+        description: "Profissional especializado(a) em limpeza e manutenção de ambientes.",
+        imageUrl: "url_da_imagem_faxineiro",
+        category: "Limpeza",
+        bannerImageUrl: "url_da_imagem_banner_faxineiro"
+      },
+      {
+        id: "5",
+        name: "Mecânico/Mecânica",
+        description: "Profissional especializado(a) em manutenção e conserto de veículos.",
+        imageUrl: "url_da_imagem_mecanico",
+        category: "Automotivo",
+        bannerImageUrl: "url_da_imagem_banner_mecanico"
+      },
+      // Continue adicionando as demais habilidades...
+
+    ];
+
+    for (const skill of newSkills) {
+      await addSkill(skill);
+    }
+  };
+
+  return (
+    <button onClick={handleClick}>Publicar</button>
+  );
+};
+
+export default CreateJob;

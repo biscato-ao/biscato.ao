@@ -14,13 +14,24 @@
 .text-right{text-align: right;}
 .bg-white{background: white !important; color: #111;}
 .rounded-7{border-radius: 10px !important;}
+.pt-2_5{padding-top: 11px;}
+.pt-2_1{padding-top: 11px !important;}
 .btn-light{
   padding-top: 14px;
+}
+.a_link_hum{
+  margin-top: -15px;
+  text-decoration: none !important;
 }
 .btn {
   box-shadow: none !important;
   outline: none !important;
 }
+.btn-home{
+  box-shadow: none !important;
+  outline: none !important;
+}
+
 .form-control{
   box-shadow: none !important;
   outline: none !important;

@@ -1,0 +1,105 @@
+      <form onSubmit={handleSubmit} className="mt-5 pt-5">
+        <input
+          type="text"
+          value={newPostData.title}
+          onChange={(e) =>
+            setNewPostData((prevData) => ({
+              ...prevData,
+              title: e.target.value,
+            }))
+          }
+          placeholder="Title"
+        />
+        <textarea
+          value={newPostData.description}
+          onChange={(e) =>
+            setNewPostData((prevData) => ({
+              ...prevData,
+              description: e.target.value,
+            }))
+          }
+          placeholder="Description"
+        ></textarea>
+        <input
+          type="text"
+          value={newPostData.user_id}
+          onChange={(e) =>
+            setNewPostData((prevData) => ({
+              ...prevData,
+              user_id: e.target.value,
+            }))
+          }
+          placeholder="User ID"
+        />
+        <input
+          type="text"
+          value={newPostData.date}
+          onChange={(e) =>
+            setNewPostData((prevData) => ({
+              ...prevData,
+              date: e.target.value,
+            }))
+          }
+          placeholder="Date"
+        />
+        <input
+          type="text"
+          value={newPostData.time}
+          onChange={(e) =>
+            setNewPostData((prevData) => ({
+              ...prevData,
+              time: e.target.value,
+            }))
+          }
+          placeholder="Time"
+        />
+        <input
+          type="text"
+          value={newPostData.location}
+          onChange={(e) =>
+            setNewPostData((prevData) => ({
+              ...prevData,
+              location: e.target.value,
+            }))
+          }
+          placeholder="Location"
+        />
+        <input
+          type="text"
+          value={newPostData.details}
+          onChange={(e) =>
+            setNewPostData((prevData) => ({
+              ...prevData,
+              details: e.target.value,
+            }))
+          }
+          placeholder="Details"
+        />
+        <input
+          type="number"
+          value={newPostData.value}
+          onChange={(e) =>
+            setNewPostData((prevData) => ({
+              ...prevData,
+              value: +e.target.value,
+            }))
+          }
+          placeholder="Value"
+        />
+        <div>
+          <label>Skill:</label>
+          <TagsInput
+            value={selected}
+            onChange={handleSkillChange}
+            onRemoved={handleSkillRemove}
+            name="skills"
+            placeHolder="Enter skills"
+          />
+          {/* Render the selected skills */}
+          {newPostData.skill.map((skill, index) => (
+            <span key={index}>{skill}</span>
+          ))}
+        </div>
+
+        <button type="submit">Publicar</button>
+      </form>

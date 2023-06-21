@@ -1,0 +1,28 @@
+.input-group-google{
+  background: #e8e8e8;
+  height: 45px;
+  padding-right: 45px;
+  border-radius: 10px;
+  border: none;
+  border-radius: 7px;
+  transition: 0.2s;
+  &:hover{
+    background: #bbbbbbed;
+    transition: 0.2s;
+  }
+  .input-group-text{
+    img{
+      width: 25px;
+      background: none !important;
+    border: none;
+    }
+    background: none !important;
+    border: none;
+  }
+  .form-control{
+    border: none;
+    background: none;
+    padding: 0px !important;
+    height: 45px;
+  }
+}

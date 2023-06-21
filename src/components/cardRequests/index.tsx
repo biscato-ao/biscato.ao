@@ -17,6 +17,7 @@ interface cardRequestsInter {
   skill: string[]
   publish_date: string; // Data de publicação do post (formato string)
   publish_time: string; // Hora de publicação do post (formato string)
+  link: string
 }
 
 export const CardRequests: React.FC<cardRequestsInter> = (props) => {
@@ -71,7 +72,7 @@ export const CardRequests: React.FC<cardRequestsInter> = (props) => {
       delay={{ show: 250, hide: 400 }}
       overlay={renderTooltip}
     >
-      <Link to="/" className='shadow-sm'>
+      <Link to={`/jobDetails/${props.link}`} className='shadow-sm'>
         <img src={logo} alt="" />
       </Link>
     </OverlayTrigger>

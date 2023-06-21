@@ -1,0 +1,19 @@
+.card-search{
+  box-shadow: none !important;
+  input{
+    box-shadow: none;
+    outline: none;
+    border: none;
+  }
+  .btn-search{
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: rgb(158, 158, 158);
+    transition: 0.2s;
+    &:hover{
+      color: black;
+      transition: 0.2s;
+    }
+  }
+}
