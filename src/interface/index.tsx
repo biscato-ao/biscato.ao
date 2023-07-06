@@ -95,7 +95,7 @@ export interface Job {
 }
 
 export interface Notification {
-  notificationId:any;
+  notificationId:string;
   rightRequest: boolean;
   userId:string; // ID do usuário a quem a notificação se destina.
   message: string; // Mensagem da notificação.
@@ -103,7 +103,11 @@ export interface Notification {
   isRead: boolean; // Indica se a notificação foi lida ou não.
   proposalId?: any; // ID da proposta associada à notificação (opcional).
   jobId?:any | string; // ID do trabalho associado à notificação (opcional).
-  contactInfo?: any; // Informações de contato (opcional).
+  requesterName?:any,
+  requesterId?:any,
+  requesterPhoto?:any,
+  requesterPhoneNumber?:any,
+  
 }
 
 

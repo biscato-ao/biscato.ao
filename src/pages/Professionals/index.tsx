@@ -10,6 +10,7 @@ import {
   query,
   doc,
   getDoc,
+  setDoc,
 } from "firebase/firestore";
 import firebaseConfig from "../../key";
 import { UserInfo, Notification } from "../../interface";
@@ -35,7 +36,7 @@ const Professionals: React.FC = () => {
   const [showNoResults, setShowNoResults] = useState(false);
 
   const [user] = useAuthState(auth);
-  const userAut = useAuthState(auth);
+  // const userAut = useAuthState(auth);
   const [userData, setUserData] = useState<any>(null);
   const uid = auth.currentUser?.uid;
 
@@ -91,50 +92,66 @@ const Professionals: React.FC = () => {
     );
     setFilteredUsers(filteredUsers);
     setShowNoResults(filteredUsers.length === 0);
-  };
+  }; 
 
   const sendWorkRequest = async (user: UserInfo) => {
-    const uid = user.uid;
-    const lastRequestTime = localStorage.getItem(`lastRequestTime_${uid}`);
-
-    if (lastRequestTime) {
-      const twentyFourHours = 24 * 60 * 60 * 1000;
-      const currentTime = new Date().getTime();
-      const lastRequestTimestamp = parseInt(lastRequestTime, 10);
-
-      if (currentTime - lastRequestTimestamp < twentyFourHours) {
-        console.log("Aguarde 24 horas antes de enviar uma nova solicitação.");
-        return;
-      }
-    }
-
-    const notification: Notification = {
-      userId: uid,
-      message: "Olá! Você recebeu uma solicitação de serviço de um cliente. Confira os detalhes da solicitação e avalie se você está disponível para realizar o trabalho. Fique à vontade para entrar em contato com o cliente para discutir mais detalhes, se necessário.",
-      timestamp: new Date(),
-      isRead: false,
-      proposalId: "",
-      jobId: "",
-      contactInfo: currentUser?.displayName,
-      notificationId: uuidv4(),
-      rightRequest: false
-    };
-
     try {
+      const uid = user.uid;
+      const lastRequestTime = localStorage.getItem(`lastRequestTime_${uid}`);
+  
+      // if (lastRequestTime) {
+      //   const twentyFourHours = 24 * 60 * 60 * 1000;
+      //   const currentTime = new Date().getTime();
+      //   const lastRequestTimestamp = parseInt(lastRequestTime, 10);
+  
+      //   if (currentTime - lastRequestTimestamp < twentyFourHours) {
+      //     console.log("Aguarde 24 horas antes de enviar uma nova solicitação.");
+      //     return;
+      //   } 
+      // }
+  
+      const notification: Notification = {
+        userId: uid,
+        message: "Olá! Você recebeu uma solicitação de serviço de um cliente. Confira os detalhes da solicitação e avalie se você está disponível para realizar o trabalho. Fique à vontade para entrar em contato com o cliente para discutir mais detalhes, se necessário.",
+        timestamp: new Date(),
+        isRead: false,
+        proposalId: "",
+        jobId: "",
+        requesterName: userData?.displayName || "", 
+        requesterId: userData?.uid || "",
+        requesterPhoto: userData?.photoURL || "",
+        requesterPhoneNumber: userData?.phoneNumber || "", 
+        notificationId: "", // Será definido após adicionar o documento
+        rightRequest: false
+      };
+  
       const notificationsCollection = collection(db, "notifications");
-      await addDoc(notificationsCollection, notification);
-
+      const newNotificationRef = await addDoc(notificationsCollection, notification);
+      const newNotificationId = newNotificationRef.id;
+  
+      console.log("ID da nova notificação:", newNotificationId);
+  
+      // Atualizar a notificação com o ID gerado
+      const updatedNotification: Notification = {
+        ...notification,
+        notificationId: newNotificationId
+      };
+  
+      const notificationDocRef = doc(db, "notifications", newNotificationId);
+      await setDoc(notificationDocRef, updatedNotification);
+  
       // Salvar a data e hora atual como a última solicitação enviada
       localStorage.setItem(
         `lastRequestTime_${uid}`,
         new Date().getTime().toString()
       );
-
+  
       console.log("Notificação enviada com sucesso!");
     } catch (error) {
       console.error("Erro ao enviar a notificação:", error);
     }
   };
+  
 
   if (!userData || !userData.uid) {
     return <PageLoader/>

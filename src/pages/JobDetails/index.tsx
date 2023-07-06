@@ -155,8 +155,11 @@ const JobDetails: React.FC = () => {
         proposalId: "",
         jobId: job.id,
         rightRequest: true,
-        contactInfo: user?.displayName,
-        notificationId: uuidv4()
+        requesterName: user?.displayName,
+        requesterId: user?.uid,
+        requesterPhoto: user?.photoURL,
+        requesterPhoneNumber: user?.phoneNumber,
+        notificationId: uuidv4(),
       };
 
       // Enviar a notificação para a coleção "notifications"
@@ -173,20 +176,19 @@ const JobDetails: React.FC = () => {
     }
   };
 
-  
   // const acceptProposal = async (proposal: Proposal) => {
   //   try {
   //     // Atualizar o status da proposta para "aceita"
   //     await updateDoc(doc(db, 'proposals', proposal.jobId), {
   //       status: 'aceita',
   //     });
-  
+
   //     // Atualizar o trabalho com a proposta aceita
   //     await updateDoc(doc(db, 'jobs', job.id), {
   //       acceptedProposal: proposal.jobId,
   //       acceptedDate: new Date(),
   //     });
-  
+
   //     // Criar uma notificação para o proponente
   //     const notification: Notification = {
   //       userId: proposal.userId,
@@ -198,146 +200,145 @@ const JobDetails: React.FC = () => {
   //       contactInfo: user?.displayName,
   //       notificationId: uuidv4(),
   //     };
-  
+
   //     // Enviar a notificação para a coleção "notifications"
   //     await addDoc(collection(db, 'notifications'), notification);
-  
+
   //     console.log('Proposta aceita com sucesso:', proposal);
   //   } catch (error) {
   //     console.error('Erro ao aceitar a proposta:', error);
   //   }
   // };
 
+  //   const acceptProposal = async (proposal: Proposal) => {
+  //   try {
+  //     const jobRef = doc(db, 'jobs', job.id);
+  //     const jobDoc = await getDoc(jobRef);
 
-//   const acceptProposal = async (proposal: Proposal) => {
-//   try {
-//     const jobRef = doc(db, 'jobs', job.id);
-//     const jobDoc = await getDoc(jobRef);
+  //     if (jobDoc.exists()) {
+  //       // Atualizar o trabalho com a proposta aceita
+  //       await updateDoc(jobRef, {
+  //         acceptedProposal: proposal.jobId,
+  //         acceptedDate: new Date(),
+  //         completedBy: new Date() || null, // Definir como null se não estiver definido
+  //         completedDate: new Date() || null, // Definir como null se não estiver definido
+  //       });
+  //     } else {
+  //       // Criar um novo trabalho com a proposta aceita
+  //       const newJobData: Job = {
+  //         jobId: job.id,
+  //         title: job.title,
+  //         description: job.description,
+  //         location: job.location,
+  //         publishDate: job.publish_date,
+  //         publishTime: job.publish_time,
+  //         skillsRequired: job.skill,
+  //         createdBy: job.user_id,
+  //         createdDate: job.publish_date,
+  //         isCompleted: false,
+  //         completedBy: proposal.userId,
+  //         completedDate: new Date() || null,
+  //         proposedBy: [],
+  //         acceptedProposal: proposal.jobId,
+  //         acceptedDate: new Date(),
+  //         value: job.value,
+  //         isCreatedByUser: false,
+  //         notificationId: function (db: Firestore, arg1: string, notificationId: any): unknown {
+  //           throw new Error("Function not implemented.");
+  //         }
+  //       };
+  //       await setDoc(jobRef, newJobData);
+  //     }
 
-//     if (jobDoc.exists()) {
-//       // Atualizar o trabalho com a proposta aceita
-//       await updateDoc(jobRef, {
-//         acceptedProposal: proposal.jobId,
-//         acceptedDate: new Date(),
-//         completedBy: new Date() || null, // Definir como null se não estiver definido
-//         completedDate: new Date() || null, // Definir como null se não estiver definido
-//       });
-//     } else {
-//       // Criar um novo trabalho com a proposta aceita
-//       const newJobData: Job = {
-//         jobId: job.id,
-//         title: job.title,
-//         description: job.description,
-//         location: job.location,
-//         publishDate: job.publish_date,
-//         publishTime: job.publish_time,
-//         skillsRequired: job.skill,
-//         createdBy: job.user_id,
-//         createdDate: job.publish_date,
-//         isCompleted: false,
-//         completedBy: proposal.userId,
-//         completedDate: new Date() || null,
-//         proposedBy: [],
-//         acceptedProposal: proposal.jobId,
-//         acceptedDate: new Date(),
-//         value: job.value,
-//         isCreatedByUser: false,
-//         notificationId: function (db: Firestore, arg1: string, notificationId: any): unknown {
-//           throw new Error("Function not implemented.");
-//         }
-//       };
-//       await setDoc(jobRef, newJobData);
-//     }
+  //     // Criar uma notificação para o proponente
+  //     const notification: Notification = {
+  //       userId: proposal.userId,
+  //       message: 'Sua proposta foi aceita para o trabalho.',
+  //       timestamp: new Date(),
+  //       isRead: false,
+  //       proposalId: proposal.jobId,
+  //       jobId: job.id,
+  //       rightRequest: true,
+  //       contactInfo: user?.displayName,
+  //       notificationId: uuidv4(),
+  //     };
 
-//     // Criar uma notificação para o proponente
-//     const notification: Notification = {
-//       userId: proposal.userId,
-//       message: 'Sua proposta foi aceita para o trabalho.',
-//       timestamp: new Date(),
-//       isRead: false,
-//       proposalId: proposal.jobId,
-//       jobId: job.id,
-//       rightRequest: true,
-//       contactInfo: user?.displayName,
-//       notificationId: uuidv4(),
-//     };
+  //     // Enviar a notificação para a coleção "notifications"
+  //     await addDoc(collection(db, 'notifications'), notification);
 
-//     // Enviar a notificação para a coleção "notifications"
-//     await addDoc(collection(db, 'notifications'), notification);
+  //     console.log('Proposta aceita com sucesso:', proposal);
+  //   } catch (error) {
+  //     console.error('Erro ao aceitar a proposta:', error);
+  //   }
+  // };
 
-//     console.log('Proposta aceita com sucesso:', proposal);
-//   } catch (error) {
-//     console.error('Erro ao aceitar a proposta:', error);
-//   }
-// };
+  const acceptProposal = async (proposal: Proposal) => {
+    try {
+      const jobRef = doc(db, "jobs", job.id);
+      const jobDoc = await getDoc(jobRef);
 
+      if (jobDoc.exists()) {
+        // Atualizar o trabalho com a proposta aceita
+        await updateDoc(jobRef, {
+          acceptedProposal: proposal.jobId,
+          acceptedDate: new Date(),
+          completedBy: new Date() || null, // Definir como null se não estiver definido
+          completedDate: new Date() || null, // Definir como null se não estiver definido
+        });
+      } else {
+        // Criar um novo trabalho com a proposta aceita
+        const newJobData: Job = {
+          jobId: job.id,
+          title: job.title,
+          description: job.description,
+          location: job.location,
+          publishDate: job.publish_date,
+          publishTime: job.publish_time,
+          skillsRequired: job.skill,
+          createdBy: job.user_id,
+          createdDate: job.publish_date,
+          isCompleted: false,
+          completedBy: proposal.userId,
+          completedDate: new Date() || null,
+          proposedBy: [],
+          acceptedProposal: proposal.jobId,
+          acceptedDate: new Date(),
+          value: job.value,
+          isCreatedByUser: false,
+          notificationId: uuidv4(), // Gerar um ID único para o campo notificationId
+        };
 
-const acceptProposal = async (proposal: Proposal) => {
-  try {
-    const jobRef = doc(db, 'jobs', job.id);
-    const jobDoc = await getDoc(jobRef);
+        const newJobRef = doc(collection(db, "jobs"));
+        const newJobId = newJobRef.id;
+        newJobData.notificationId = newJobId; // Atribuir o ID único ao campo notificationId
+        await setDoc(newJobRef, newJobData);
+      }
 
-    if (jobDoc.exists()) {
-      // Atualizar o trabalho com a proposta aceita
-      await updateDoc(jobRef, {
-        acceptedProposal: proposal.jobId,
-        acceptedDate: new Date(),
-        completedBy: new Date() || null, // Definir como null se não estiver definido
-        completedDate: new Date() || null, // Definir como null se não estiver definido
-      });
-    } else {
-      // Criar um novo trabalho com a proposta aceita
-      const newJobData: Job = {
+      // Criar uma notificação para o proponente
+      const notification: Notification = {
+        userId: proposal.userId,
+        message: "Sua proposta foi aceita para o trabalho.",
+        timestamp: new Date(),
+        isRead: false,
+        proposalId: proposal.jobId,
         jobId: job.id,
-        title: job.title,
-        description: job.description,
-        location: job.location,
-        publishDate: job.publish_date,
-        publishTime: job.publish_time,
-        skillsRequired: job.skill,
-        createdBy: job.user_id,
-        createdDate: job.publish_date,
-        isCompleted: false,
-        completedBy: proposal.userId,
-        completedDate: new Date() || null,
-        proposedBy: [],
-        acceptedProposal: proposal.jobId,
-        acceptedDate: new Date(),
-        value: job.value,
-        isCreatedByUser: false,
-        notificationId: uuidv4(), // Gerar um ID único para o campo notificationId
+        rightRequest: true,
+        requesterName: user?.displayName,
+        requesterId: user?.uid,
+        requesterPhoto: user?.photoURL,
+        requesterPhoneNumber: user?.phoneNumber,
+        notificationId: uuidv4(), // Usar o mesmo valor atribuído ao campo notificationId do trabalho
       };
 
-      const newJobRef = doc(collection(db, 'jobs'));
-      const newJobId = newJobRef.id;
-      newJobData.notificationId = newJobId; // Atribuir o ID único ao campo notificationId
-      await setDoc(newJobRef, newJobData);
+      // Enviar a notificação para a coleção "notifications"
+      await addDoc(collection(db, "notifications"), notification);
+
+      console.log("Proposta aceita com sucesso:", proposal);
+    } catch (error) {
+      console.error("Erro ao aceitar a proposta:", error);
     }
+  };
 
-    // Criar uma notificação para o proponente
-    const notification: Notification = {
-      userId: proposal.userId,
-      message: 'Sua proposta foi aceita para o trabalho.',
-      timestamp: new Date(),
-      isRead: false,
-      proposalId: proposal.jobId,
-      jobId: job.id,
-      rightRequest: true,
-      contactInfo: user?.displayName,
-      notificationId: uuidv4(), // Usar o mesmo valor atribuído ao campo notificationId do trabalho
-    };
-
-    // Enviar a notificação para a coleção "notifications"
-    await addDoc(collection(db, 'notifications'), notification);
-
-    console.log('Proposta aceita com sucesso:', proposal);
-  } catch (error) {
-    console.error('Erro ao aceitar a proposta:', error);
-  }
-};
-
-
- 
   return (
     <main className="JobDetails">
       <Menu />
@@ -385,7 +386,9 @@ const acceptProposal = async (proposal: Proposal) => {
                       <div>
                         <p>{proposal.proposalText}</p>
                         <>{proposal.userId}</>
-                        <button  onClick={() => acceptProposal(proposal)}>aceitar</button>
+                        <button onClick={() => acceptProposal(proposal)}>
+                          aceitar
+                        </button>
                       </div>
                     </li>
                   ))}
