@@ -60,11 +60,11 @@ const Profile: React.FC = () => {
             <div className="row justify-content-center">
               <div className="col-lg-7">
                 <div className="card border shadow-none mt-5 ">
-                  <div className="capa" style={{ backgroundImage: `url(${userData?.coverPhotoURL})` }} />
+                  <div className="capa" />
                   <div className="card-body">
                     <div className="inforUser d-flex">
                       <div className="photoURL">
-                        <img src={userData?.photoURL || userS} alt="" />
+                        <img src={user?.photoURL || userS} alt="" />
                       </div>
                       <div className="ms-3">
                         <div className="d-flex">
@@ -83,7 +83,7 @@ const Profile: React.FC = () => {
                         </div>
                         <div className="local">
                           <HiOutlineLocationMarker className="mr-2" />
-                          
+                          {userData?.location}
                         </div>
                         <div className="sk">
                           <div className="badge me-2">Cabeleireira</div>

@@ -32,6 +32,10 @@ export const CardRequests: React.FC<cardRequestsInter> = (props) => {
     </Tooltip>
   );
 
+  const salveJobs = () =>{
+    console.log('sim')
+  }
+
   return <div className="card border card-requests">
     <div className="card-header justify-content-between d-flex">
     <div>
@@ -44,9 +48,9 @@ export const CardRequests: React.FC<cardRequestsInter> = (props) => {
       delay={{ show: 250, hide: 400 }}
       overlay={renderTooltip2}
     >
-    <Link to="/" className='guardar'>
+    <button onClick={salveJobs} className='guardar'>
       <HiBookmark/>
-    </Link>
+    </button>
     </OverlayTrigger>
     </div>
   </div>
@@ -64,7 +68,7 @@ export const CardRequests: React.FC<cardRequestsInter> = (props) => {
     </div>
     <div className="card-footer pt-0 d-flex justify-content-between">
     <div>
-      propostas: <b>10</b>
+      propostas: <b>00</b>
     </div>
     <div>
     <OverlayTrigger

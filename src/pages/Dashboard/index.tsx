@@ -64,6 +64,7 @@ const Dashboard: React.FC = () => {
     }
   };
 
+
   return (
     <main>
       <Menu />
@@ -81,7 +82,7 @@ const Dashboard: React.FC = () => {
                     onChange={(e) => setSearchValue(e.target.value)}
                   />
                   <OverlayTrigger
-                    placement="bottom"
+                    placement="left"
                     delay={{ show: 250, hide: 400 }}
                     overlay={searchTooltip}
                   >

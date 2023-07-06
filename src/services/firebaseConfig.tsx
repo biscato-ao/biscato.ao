@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth"
+import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAjvJJlhrhrrRZ3CnqmeQ8202cHWa85UXc",
@@ -15,3 +16,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const storage = getStorage();
+
+
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /users/{userId} {
+//       allow read, write: if request.auth != null && request.auth.uid == userId;
+//     }
+//   }
+// }

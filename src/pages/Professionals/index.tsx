@@ -8,6 +8,8 @@ import {
   addDoc,
   where,
   query,
+  doc,
+  getDoc,
 } from "firebase/firestore";
 import firebaseConfig from "../../key";
 import { UserInfo, Notification } from "../../interface";
@@ -15,6 +17,8 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { v4 as uuidv4 } from "uuid";
 import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { PageLoader } from "../../components/pageLoader";
 
 const firebaseConfigDB = initializeApp(firebaseConfig);
 
@@ -29,6 +33,33 @@ const Professionals: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [filteredUsers, setFilteredUsers] = useState<UserInfo[]>([]);
   const [showNoResults, setShowNoResults] = useState(false);
+
+  const [user] = useAuthState(auth);
+  const userAut = useAuthState(auth);
+  const [userData, setUserData] = useState<any>(null);
+  const uid = auth.currentUser?.uid;
+
+  useEffect(() => {
+    const getUsers = async () => {
+      if (uid) {
+        try {
+          const userDoc = doc(db, "users", uid);
+          const docSnapshot = await getDoc(userDoc);
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            console.log("Dados do usuário:", userData);
+            setUserData(userData);
+          } else {
+            console.log('Usuário não encontrado na coleção "users"');
+          }
+        } catch (error) {
+          console.error("Erro ao obter dados do usuário:", error);
+        }
+      }
+    };
+
+    getUsers();
+  }, [uid, db]);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -79,14 +110,14 @@ const Professionals: React.FC = () => {
 
     const notification: Notification = {
       userId: uid,
-      message:
-        "Olá! Você recebeu uma solicitação de serviço de um cliente. Confira os detalhes da solicitação e avalie se você está disponível para realizar o trabalho. Fique à vontade para entrar em contato com o cliente para discutir mais detalhes, se necessário.",
+      message: "Olá! Você recebeu uma solicitação de serviço de um cliente. Confira os detalhes da solicitação e avalie se você está disponível para realizar o trabalho. Fique à vontade para entrar em contato com o cliente para discutir mais detalhes, se necessário.",
       timestamp: new Date(),
       isRead: false,
       proposalId: "",
       jobId: "",
       contactInfo: currentUser?.displayName,
-      notificationId: uuidv4(), // Gerar um novo UUID para o notificationId
+      notificationId: uuidv4(),
+      rightRequest: false
     };
 
     try {
@@ -104,6 +135,10 @@ const Professionals: React.FC = () => {
       console.error("Erro ao enviar a notificação:", error);
     }
   };
+
+  if (!userData || !userData.uid) {
+    return <PageLoader/>
+  }
 
   return (
     <main>
@@ -132,13 +167,19 @@ const Professionals: React.FC = () => {
                 <div>
                   {(searchValue !== "" ? filteredUsers : users).map((user) => (
                     <div key={user.uid} className="mb-3">
-                      <div>
+                      <div> 
                         <img src={user.photoURL || ""} alt="" />
                         <p>{user.displayName}</p>
-                        <button onClick={() => sendWorkRequest(user)}>
-                          Enviar pedido de serviço
-                        </button>
-                        <Link to={user.uid}>Ver</Link>
+
+                        {
+                          userData.isActive !== false ? (
+                            <button onClick={() => sendWorkRequest(user)}>
+                            Enviar pedido de serviço
+                          </button>
+                          ) : null
+                        }
+
+                        <Link to={`/professionalsDetails/${user.uid}`}>Ver</Link>
                         <p>{user.uid}</p>
                       </div>
                     </div>

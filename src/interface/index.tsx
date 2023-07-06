@@ -1,3 +1,5 @@
+import { Firestore } from "firebase/firestore";
+
 export interface Post {
   completedBy?: any;
   id?: any; // Identificador único do post
@@ -34,28 +36,28 @@ export interface UserInfo {
 
 
 // export interface UserInfo {
-//   uid: string; // Unique user ID specific to the project.
-//   email: string | null; // User's email.
-//   displayName: string | null; // User's display name.
-//   phoneNumber: string | null; // User's normalized phone number in E.164 format (e.g., +16505550101).
-//   photoURL: string | null; // User's profile photo URL.
-//   providerId: string; // The provider used to authenticate the user.
-//   skills: string[]; // User's related skills.
-//   status: string; // User's status.
-//   location: string; // User's location.
-//   utolaCode: string; // User's Utola code.
-//   verified: boolean; // Indicates whether the user is verified or not.
-//   about: string; // User's biography or description.
-//   username: string; // User's username.
-//   clients: string[]; // Clients associated with the user.
-//   coverPhotoURL: string | null; // User's cover photo URL.
-//   isActive: boolean; // Indicates whether the user is active (true) as a client or professional.
-//   previousWorks: string[]; // User's previous works (array).
-//   certifications: string[]; // User's certifications (array).
-//   employmentHistory: string[]; // User's employment history (array).
-//   otherExperiences: string[]; // User's other experiences (array).
-//   introductionVideoURL: string | null; // User's introduction video URL.
-//   education: string[]; // User's education (array).
+//   uid: string; // ID único do usuário específico para o projeto.
+//   email: string | null; // E-mail do usuário.
+//   displayName: string | null; // Nome de exibição do usuário.
+//   phoneNumber: string | null; // Número de telefone normalizado do usuário no formato E.164 (por exemplo, +16505550101).
+//   photoURL: string | null; // URL da foto de perfil do usuário.
+//   providerId: string; // O provedor usado para autenticar o usuário.
+//   skills: string[]; // Habilidades relacionadas do usuário.
+//   status: string; // Status do usuário.
+//   location: string; // Localização do usuário.
+//   utolaCode: string; // Código Utola do usuário.
+//   verified: boolean; // Indica se o usuário está verificado ou não.
+//   about: string; // Biografia ou descrição do usuário.
+//   username: string; // Nome de usuário do usuário.
+//   clients: string[]; // Clientes associados ao usuário.
+//   coverPhotoURL: string | null; // URL da foto de capa do usuário.
+//   isActive: boolean; // Indica se o usuário está ativo (true) como cliente ou profissional.
+//   previousWorks: string[]; // Trabalhos anteriores do usuário (array).
+//   certifications: string[]; // Certificações do usuário (array).
+//   employmentHistory: string[]; // Histórico de emprego do usuário (array).
+//   otherExperiences: string[]; // Outras experiências do usuário (array).
+//   introductionVideoURL: string | null; // URL do vídeo de introdução do usuário.
+//   education: string[]; // Educação do usuário (array).
 // }
 
 
@@ -72,6 +74,8 @@ export interface Proposal {
 }
 
 export interface Job {
+  notificationId: any;
+  isCreatedByUser: boolean;
   jobId: string; // ID exclusivo do trabalho.
   title: string; // Título do trabalho.
   description: string; // Descrição do trabalho.
@@ -92,7 +96,8 @@ export interface Job {
 
 export interface Notification {
   notificationId:any;
-  userId: any; // ID do usuário a quem a notificação se destina.
+  rightRequest: boolean;
+  userId:string; // ID do usuário a quem a notificação se destina.
   message: string; // Mensagem da notificação.
   timestamp: Date; // Data e hora em que a notificação foi gerada.
   isRead: boolean; // Indica se a notificação foi lida ou não.

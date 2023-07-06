@@ -18,6 +18,7 @@ import {
   updateDoc,
   setDoc,
   getDoc,
+  Firestore,
 } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import firebaseConfig from "../../key";
@@ -153,8 +154,9 @@ const JobDetails: React.FC = () => {
         isRead: false,
         proposalId: "",
         jobId: job.id,
+        rightRequest: true,
         contactInfo: user?.displayName,
-        notificationId: undefined
+        notificationId: uuidv4()
       };
 
       // Enviar a notificação para a coleção "notifications"
@@ -207,7 +209,70 @@ const JobDetails: React.FC = () => {
   // };
 
 
-  const acceptProposal = async (proposal: Proposal) => {
+//   const acceptProposal = async (proposal: Proposal) => {
+//   try {
+//     const jobRef = doc(db, 'jobs', job.id);
+//     const jobDoc = await getDoc(jobRef);
+
+//     if (jobDoc.exists()) {
+//       // Atualizar o trabalho com a proposta aceita
+//       await updateDoc(jobRef, {
+//         acceptedProposal: proposal.jobId,
+//         acceptedDate: new Date(),
+//         completedBy: new Date() || null, // Definir como null se não estiver definido
+//         completedDate: new Date() || null, // Definir como null se não estiver definido
+//       });
+//     } else {
+//       // Criar um novo trabalho com a proposta aceita
+//       const newJobData: Job = {
+//         jobId: job.id,
+//         title: job.title,
+//         description: job.description,
+//         location: job.location,
+//         publishDate: job.publish_date,
+//         publishTime: job.publish_time,
+//         skillsRequired: job.skill,
+//         createdBy: job.user_id,
+//         createdDate: job.publish_date,
+//         isCompleted: false,
+//         completedBy: proposal.userId,
+//         completedDate: new Date() || null,
+//         proposedBy: [],
+//         acceptedProposal: proposal.jobId,
+//         acceptedDate: new Date(),
+//         value: job.value,
+//         isCreatedByUser: false,
+//         notificationId: function (db: Firestore, arg1: string, notificationId: any): unknown {
+//           throw new Error("Function not implemented.");
+//         }
+//       };
+//       await setDoc(jobRef, newJobData);
+//     }
+
+//     // Criar uma notificação para o proponente
+//     const notification: Notification = {
+//       userId: proposal.userId,
+//       message: 'Sua proposta foi aceita para o trabalho.',
+//       timestamp: new Date(),
+//       isRead: false,
+//       proposalId: proposal.jobId,
+//       jobId: job.id,
+//       rightRequest: true,
+//       contactInfo: user?.displayName,
+//       notificationId: uuidv4(),
+//     };
+
+//     // Enviar a notificação para a coleção "notifications"
+//     await addDoc(collection(db, 'notifications'), notification);
+
+//     console.log('Proposta aceita com sucesso:', proposal);
+//   } catch (error) {
+//     console.error('Erro ao aceitar a proposta:', error);
+//   }
+// };
+
+
+const acceptProposal = async (proposal: Proposal) => {
   try {
     const jobRef = doc(db, 'jobs', job.id);
     const jobDoc = await getDoc(jobRef);
@@ -233,14 +298,20 @@ const JobDetails: React.FC = () => {
         createdBy: job.user_id,
         createdDate: job.publish_date,
         isCompleted: false,
-        completedBy: proposal.userId, // Definir como null se não estiver definido
-        completedDate: new Date() || null, // Definir como null se não estiver definido
+        completedBy: proposal.userId,
+        completedDate: new Date() || null,
         proposedBy: [],
         acceptedProposal: proposal.jobId,
         acceptedDate: new Date(),
         value: job.value,
+        isCreatedByUser: false,
+        notificationId: uuidv4(), // Gerar um ID único para o campo notificationId
       };
-      await setDoc(jobRef, newJobData);
+
+      const newJobRef = doc(collection(db, 'jobs'));
+      const newJobId = newJobRef.id;
+      newJobData.notificationId = newJobId; // Atribuir o ID único ao campo notificationId
+      await setDoc(newJobRef, newJobData);
     }
 
     // Criar uma notificação para o proponente
@@ -251,8 +322,9 @@ const JobDetails: React.FC = () => {
       isRead: false,
       proposalId: proposal.jobId,
       jobId: job.id,
+      rightRequest: true,
       contactInfo: user?.displayName,
-      notificationId: uuidv4(),
+      notificationId: uuidv4(), // Usar o mesmo valor atribuído ao campo notificationId do trabalho
     };
 
     // Enviar a notificação para a coleção "notifications"
@@ -264,9 +336,8 @@ const JobDetails: React.FC = () => {
   }
 };
 
-  
-  
 
+ 
   return (
     <main className="JobDetails">
       <Menu />

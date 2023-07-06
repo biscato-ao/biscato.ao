@@ -46,7 +46,7 @@ export const ButtomCreateJob: React.FC = () => {
   const [newPostData, setNewPostData] = useState<Post>({
     completedBy: false,
     id: "",
-    title: "", 
+    title: "",
     description: "",
     user_id: user?.uid,
     date: "",
@@ -72,11 +72,28 @@ export const ButtomCreateJob: React.FC = () => {
     }
   };
 
-  const handleSkillChange = async (tags: string[]) => {
-    const skillNames = tags.filter((tag) => !newPostData.skill.includes(tag));
-    if (skillNames.length === 0) return; // Skip the query if there are no new skill names
+  // const handleSkillChange = async (tags: string[]) => {
+  //   const skillNames = tags.filter((tag) => !newPostData.skill.includes(tag));
+  //   if (skillNames.length === 0) return; // Skip the query if there are no new skill names
 
-    const skillQuery = query(skillsCollection, where("name", "in", skillNames));
+  //   const skillQuery = query(skillsCollection, where("name", "in", skillNames));
+  //   const querySnapshot = await getDocs(skillQuery);
+  //   const skills = querySnapshot.docs.map((doc) => doc.data().name);
+
+  //   setNewPostData((prevData) => ({
+  //     ...prevData,
+  //     skill: [...prevData.skill, ...skills],
+  //   }));
+  // };
+
+  const handleSkillChange = async (tags: string[]) => {
+    const newSkills = tags.filter((tag) => !newPostData.skill.includes(tag));
+
+    if (newSkills.length === 0) {
+      return; // Skip the query if there are no new skill names
+    }
+
+    const skillQuery = query(skillsCollection, where("name", "in", newSkills));
     const querySnapshot = await getDocs(skillQuery);
     const skills = querySnapshot.docs.map((doc) => doc.data().name);
 
@@ -189,8 +206,13 @@ export const ButtomCreateJob: React.FC = () => {
                       type="text"
                       placeholder="..."
                       icon={<HiOutlineLightningBolt />}
-                      value={undefined}
-                      onChange={undefined}
+                      value={newPostData.title}
+                      onChange={(e: { target: { value: any } }) =>
+                        setNewPostData((prevData) => ({
+                          ...prevData,
+                          title: e.target.value,
+                        }))
+                      }
                       rows={0}
                       title="Titulo do trabalho"
                     />
@@ -200,8 +222,13 @@ export const ButtomCreateJob: React.FC = () => {
                       type="text"
                       placeholder="..."
                       icon={<HiOutlineNewspaper />}
-                      value={undefined}
-                      onChange={undefined}
+                      value={newPostData.description}
+                      onChange={(e: { target: { value: any } }) =>
+                        setNewPostData((prevData) => ({
+                          ...prevData,
+                          description: e.target.value,
+                        }))
+                      }
                       rows={5}
                       title="Descrição do trabalho"
                     />
@@ -211,8 +238,13 @@ export const ButtomCreateJob: React.FC = () => {
                       type="time"
                       placeholder="..."
                       icon={<HiOutlineClock />}
-                      value={undefined}
-                      onChange={undefined}
+                      value={newPostData.time}
+                      onChange={(e: { target: { value: any } }) =>
+                        setNewPostData((prevData) => ({
+                          ...prevData,
+                          time: e.target.value,
+                        }))
+                      }
                       rows={0}
                       title="Hora"
                     />
@@ -222,8 +254,13 @@ export const ButtomCreateJob: React.FC = () => {
                       type="date"
                       placeholder="..."
                       icon={<HiOutlineCalendar />}
-                      value={undefined}
-                      onChange={undefined}
+                      value={newPostData.date}
+                      onChange={(e: { target: { value: any } }) =>
+                        setNewPostData((prevData) => ({
+                          ...prevData,
+                          date: e.target.value,
+                        }))
+                      }
                       rows={0}
                       title="Dia"
                     />
@@ -237,8 +274,13 @@ export const ButtomCreateJob: React.FC = () => {
                       type="text"
                       placeholder="..."
                       icon={<HiOutlineLocationMarker />}
-                      value={undefined}
-                      onChange={undefined}
+                      value={newPostData.location}
+                      onChange={(e: { target: { value: any } }) =>
+                        setNewPostData((prevData) => ({
+                          ...prevData,
+                          location: e.target.value,
+                        }))
+                      }
                       rows={0}
                       title="Localização do trabalho"
                     />
@@ -248,8 +290,13 @@ export const ButtomCreateJob: React.FC = () => {
                       type="text"
                       placeholder="..."
                       icon={<HiOutlineHand />}
-                      value={undefined}
-                      onChange={undefined}
+                      value={newPostData.value}
+                      onChange={(e: { target: { value: any | number } }) =>
+                        setNewPostData((prevData) => ({
+                          ...prevData,
+                          value: +e.target.value,
+                        }))
+                      }
                       rows={5}
                       title="Quanto pretendo pagar"
                     />
@@ -257,20 +304,23 @@ export const ButtomCreateJob: React.FC = () => {
                   <div className="col-12 mb-4 mt-1">
                     <label htmlFor="">Habilidades </label>
                     <TagsInput
-                      value={selected}
+                      value={newPostData.skill}
                       onChange={handleSkillChange}
                       onRemoved={handleSkillRemove}
                       name="skills"
                       placeHolder="Enter skills"
                     />
                     {/* Render the selected skills */}
-                    {newPostData.skill.map((skill, index) => (
-                      <span key={index}>{skill}</span>
-                    ))}
+                    <div className="mt-2">
+                      {newPostData.skill.map((skill, index) => (
+                        <span key={index}>
+                          <span className="me-3">{skill}</span>
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
-
             </div>
           </Modal.Body>
           <Modal.Footer className="border-top">
@@ -279,7 +329,7 @@ export const ButtomCreateJob: React.FC = () => {
               <button
                 className="btn button-btn"
                 type="button"
-                onClick={handleNext} 
+                onClick={handleNext}
               >
                 Próximo
               </button>

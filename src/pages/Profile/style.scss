@@ -3,6 +3,9 @@
     .container{
       .row{
         .col-lg-7{
+          .card-border-00 {
+            border: 1px solid #f8f8f8 !important;
+          }
           .card{
             box-shadow: none !important;
             .capa{

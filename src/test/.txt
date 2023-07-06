@@ -1,0 +1,74 @@
+import React, { useState, useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../services/firebaseConfig';
+import { doc, getDoc, getFirestore, updateDoc } from 'firebase/firestore';
+import { useUpdateProfile } from 'react-firebase-hooks/auth';
+
+const Test: React.FC = () => {
+  const [user] = useAuthState(auth);
+  const [userData, setUserData] = useState<any>(null);
+  const uid = auth.currentUser?.uid;
+  const db = getFirestore();
+
+  const [displayName, setDisplayName] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+  const [updateProfile, updating, error] = useUpdateProfile(auth);
+
+  useEffect(() => {
+    const getUserData = async () => {
+      if (uid) {
+        try {
+          const userDoc = doc(db, 'users', uid);
+          const docSnapshot = await getDoc(userDoc);
+          if (docSnapshot.exists()) {
+            const userData = docSnapshot.data();
+            console.log('Dados do usuário:', userData);
+            setUserData(userData);
+          } else {
+            console.log('Usuário não encontrado na coleção "users"');
+          }
+        } catch (error) {
+          console.error('Erro ao obter dados do usuário:', error);
+        }
+      }
+    };
+
+    getUserData();
+  }, [uid, db]);
+
+  const handleProfileUpdate = async () => {
+    try {
+      if (uid) {
+        const userDocRef = doc(db, 'users', uid);
+        await updateDoc(userDocRef, {
+          displayName: displayName,
+          photoURL: photoURL,
+        });
+        console.log('Profile updated successfully!');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
+  };
+  return (
+    <div>
+      <img src={userData?.photoURL || null} alt="" />
+
+      <input
+        type="text"
+        value={displayName}
+        onChange={(e) => setDisplayName(e.target.value)}
+        placeholder="Display Name"
+      />
+      <input
+        type="text"
+        value={photoURL}
+        onChange={(e) => setPhotoURL(e.target.value)}
+        placeholder="Photo URL"
+      />
+      <button onClick={handleProfileUpdate}>Update profile</button>
+    </div>
+  );
+};
+
+export default Test;

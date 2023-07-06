@@ -67,6 +67,7 @@ export const Menu: React.FC = () => {
 
     getUserData();
   }, [uid, db]);
+  
   const defaultProfileImage = "/path/to/default/profile/image.jpg";
   return (
     <nav className="navbar border-bottom fixed-top">
@@ -147,11 +148,11 @@ export const Menu: React.FC = () => {
               <Dropdown>
                 <Dropdown.Toggle id="dropdown-basic-button">
                   <div className="avatar">
-                    <img src={user?.photoURL || defaultProfileImage} alt="" />
+                    <img src={userData?.photoURL || defaultProfileImage} alt="" />
                   </div>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="shadow-sm border-0">
-                  {user?.displayName}
+                  {userData?.displayName}
                   <li>
                     <Link className="dropdown-item" to="/profile">
                       Perfil
